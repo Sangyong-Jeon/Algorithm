@@ -1,4 +1,7 @@
 /*
+nPr 공식
+nPr = n! / (n-r)!
+
 순열을 구하는 첫번째 방법 : next_permutation과 prev_permutation 함수 이용
 
 next_permutation
