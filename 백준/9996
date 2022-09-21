@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    string a, b;
+    cin >> n >> a;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> b;
+        if (a.size() > b.size() + 1)
+        {
+            cout << "NE\n";
+            continue;
+        }
+        int j = 0, k = 0;
+        for (j = 0; j < a.size(); j++)
+            if (a[j] != b[j])
+                break;
+        if (a[j] != '*')
+        {
+            cout << "NE\n";
+            continue;
+        }
+        for (j = 0; j < a.size(); j++)
+        {
+            if (a[a.size() - j - 1] != b[b.size() - j - 1])
+                break;
+        }
+        if (a[a.size() - j - 1] != '*')
+            cout << "NE\n";
+        else
+            cout << "DA\n";
+    }
+    return 0;
+}
+
+/* 방법1
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    string s, ori_s, pre, suf;
+    cin >> n >> ori_s;
+    int pos = ori_s.find('*');
+    pre = ori_s.substr(0, pos);
+    suf = ori_s.substr(pos + 1);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s;
+        if (pre.size() + suf.size() > s.size())
+            cout << "NE\n";
+        else
+        {
+            if (pre == s.substr(0, pre.size()) && suf == s.substr(s.size() - suf.size()))
+                cout << "DA\n";
+            else
+                cout << "NE\n";
+        }
+    }
+    return 0;
+}
+*/
