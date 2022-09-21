@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+string s, ret;
+int cnt[200], flag;
+char mid;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> s;
+    for (char a : s)
+        cnt[a]++;
+    for (int i = 'Z'; i >= 'A'; i--) // Z부터 A까지 반복
+    {
+        if (cnt[i]) // 알파벳숫자에 해당하는 배열의 값이 있을 때 검증
+        {
+            if (cnt[i] & 1) // 홀수일 때
+            {
+                mid = char(i);
+                flag++;
+                cnt[i]--; // 1개는 mid에 저장하고 짝수로 만듬
+            }
+            if (flag == 2) // 홀수가 2번 이상 나왔을 때
+                break;
+            for (int j = 0; j < cnt[i]; j += 2)
+            {
+                ret = char(i) + ret;
+                ret += char(i);
+            }
+        }
+    }
+    if (mid) // 글자 중간에 저장해뒀던 문자를 중간에 삽입
+        ret.insert(ret.begin() + ret.size() / 2, mid);
+    if (flag == 2)
+        cout << "I'm Sorry Hansoo\n";
+    else
+        cout << ret << '\n';
+}
