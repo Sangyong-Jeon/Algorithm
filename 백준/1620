@@ -1,0 +1,33 @@
+/*
+atoi(s.c_str()) : 문자열을 int로 변경해야 할 때 사용함
+예를 들면, 입력이 "abc" 또는 0 이 들어온다면 string으로 입력을 받아 입력받은 글자가 문자열인지 숫자인지 확인해야하는 로직이 필요할 때
+문자열 s를 기반으로 atoi(s.c_str())을 사용한다.
+입력받은 문자열이 문자라면 0을 반환하고, 아니라면 숫자를 반환한다.
+*/
+#include <bits/stdc++.h>
+using namespace std;
+map<string, int> mp;
+string str, a[100010];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int N, M, i;
+    cin >> N >> M;
+    for (i = 0; i < N; i++)
+    {
+        cin >> str;
+        mp[str] = i + 1;
+        a[i + 1] = str;
+    }
+    for (i = 0; i < M; i++)
+    {
+        cin >> str;
+        if (atoi(str.c_str()) == 0)
+            cout << mp[str] << '\n';
+        else
+            cout << a[atoi(str.c_str())] << '\n';
+    }
+    return 0;
+}
