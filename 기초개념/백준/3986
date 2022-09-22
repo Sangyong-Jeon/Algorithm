@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    char a[100001];
+    int n, ret = 0;
+    string s;
+    cin >> n;
+    while (n--)
+    {
+        cin >> s;
+        int top = 0;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (a[top] == s[i])
+                top--;
+            else
+                a[++top] = s[i];
+        }
+        if (top == 0)
+            ret++;
+    }
+    cout << ret << '\n';
+    return 0;
+}
+/* Stack 사용
+#include <bits/stdc++.h>
+using namespace std;
+int n, ret;
+string s;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s;
+        stack<char> stk;
+        for (char a : s)
+        {
+            if (stk.size() && stk.top() == a) // size()는 스택에 값이 있는지 확인하는 것이므로 무조건 쓰자. 없는데 값을 꺼내면 참조에러
+                stk.pop();
+            else
+                stk.push(a);
+        }
+        if (stk.size() == 0)
+            ret++;
+    }
+    cout << ret << '\n';
+    return 0;
+}\
+*/
