@@ -1,0 +1,61 @@
+// 투포인터 | 메모리 2080KB | 시간 0ms
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, a[15001], cnt;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    sort(a, a + n); // 투포인터를 사용할 것이므로 오름차순 정렬
+    if (m > 200000) // 각 재료의 번호 최대값은 100,000이하이므로, 두 재료를 합친 값이 200,000 초과라면 만들수 없음
+        cout << 0 << '\n';
+    else
+    {
+        int ptS = 0, ptE = n - 1;
+        while (ptS < ptE)
+        {
+            if (a[ptS] + a[ptE] == m)
+            {
+                cnt++;
+                ptS++;
+                ptE--;
+            }
+            else if (a[ptS] + a[ptE] < m)
+                ptS++;
+            else if (a[ptS] + a[ptE] > m)
+                ptE--;
+        }
+        cout << cnt << '\n';
+    }
+    return 0;
+}
+
+/* 이중 for문 | 메모리 2080KB | 시간 80ms
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, a[15001], cnt;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    if (m > 200000)
+        cout << 0 << '\n';
+    else
+    {
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                if (a[i] + a[j] == m)
+                    cnt++;
+        cout << cnt << '\n';
+    }
+    return 0;
+}
+*/
