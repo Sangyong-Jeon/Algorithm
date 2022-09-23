@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, j, l, r, temp, ret;
+int main()
+{
+    cin >> n >> m >> j;
+    l = 1; // 장바구니 초기 위치
+    for (int i = 0; i < j; i++)
+    {
+        r = l + m - 1;              // 장바구니끝점(r) = 장바구니시작점(l) + 장바구니크기(m) - 1;
+        cin >> temp;                // 사과 떨어지는 위치
+        if (temp >= l && temp <= r) // 장바구니 안에 떨어지면 넘기기
+            continue;
+        else
+        {
+            if (temp < l) // 장바구니보다 왼쪽으로 떨어졌을 때
+            {
+                ret += (l - temp);
+                l = temp;
+            }
+            else
+            {
+                l += (temp - r);
+                ret += (temp - r);
+            }
+        }
+    }
+    cout << ret << '\n';
+    return 0;
+}
