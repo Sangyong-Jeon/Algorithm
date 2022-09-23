@@ -1,0 +1,72 @@
+// 배열만 사용 - 메모리 1280KB | 시간 0ms
+#include <stdio.h>
+#define M 104
+int mp[M][M], qx[M * M], qy[M * M], via[M][M];
+int dx[4] = {1, -1, 0, 0}, dy[4] = {0, 0, 1, -1};
+int main()
+{
+    int n, m, x, y, st, ed, i, j, ny, nx;
+    scanf("%d%d", &n, &m);
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            scanf("%1d", &mp[i][j]);
+    st = ed = -1;
+    qx[++st] = 0;
+    qy[st] = 0;
+    via[0][0] = 1;   // 큐 초기화
+    while (st != ed) // 큐에 더 이상 검색자료가 없으면 종료
+    {
+        x = qx[++ed];
+        y = qy[ed];
+        for (i = 0; i < 4; i++) // 상하좌우로 갈 수 있으면 큐에 넣기
+        {
+            nx = x + dx[i];
+            ny = y + dy[i];
+            if (nx >= 0 && nx < m && ny >= 0 && ny < n && mp[ny][nx] == 1 && via[ny][nx] == 0)
+            {
+                qx[++st] = nx;
+                qy[st] = ny;
+                via[ny][nx] = via[y][x] + 1;
+            }
+        }
+    }
+    printf("%d", via[n - 1][m - 1]);
+    return 0;
+}
+/* queue 사용 - 메모리 2188KB | 시간 0ms
+// 여러 헤더를 빨리 추가하려고 <bits/stdc++.h>를 사용해서 메모리를 더 먹음
+#include <bits/stdc++.h>
+using namespace std;
+#define M 104
+int dy[4] = {-1, 0, 1, 0};
+int dx[4] = {0, 1, 0, -1};
+int n, m, a[M][M], visited[M][M], y, x, ny, nx;
+int main()
+{
+    scanf("%d %d", &n, &m);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            scanf("%1d", &a[i][j]);
+    queue<pair<int, int>> q;
+    visited[0][0] = 1;
+    q.push({0, 0});
+    while (q.size())
+    {
+        tie(y, x) = q.front();
+        q.pop();
+        for (int i = 0; i < 4; i++)
+        {
+            ny = y + dy[i];
+            nx = x + dx[i];
+            if (ny < 0 || ny >= n || nx < 0 || nx >= m || a[ny][nx] == 0)
+                continue;
+            if (visited[ny][nx])
+                continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny, nx});
+        }
+    }
+    printf("%d", visited[n - 1][m - 1]);
+    return 0;
+}
+*/
