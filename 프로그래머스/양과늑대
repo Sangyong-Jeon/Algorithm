@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int N, answer;
+vector<int> adj[17], _info;
+void sol(int n, set<int> s, int sheep, int wolf)
+{
+    if (_info[n])
+        wolf++;
+    else
+        sheep++;
+
+    if (wolf >= sheep)
+        return;
+
+    s.erase(n); // s에 있는 값 중 n 삭제
+    answer = max(sheep, answer);
+    for (int nxt : adj[n])
+        s.insert(nxt);
+    for (int v : s)
+        sol(v, s, sheep, wolf);
+}
+
+int solution(vector<int> info, vector<vector<int>> edges)
+{
+    N = info.size();
+    _info = info;
+    for (auto eg : edges)
+        adj[eg[0]].push_back(eg[1]);
+    sol(0, {0}, 0, 0);
+    return answer;
+}

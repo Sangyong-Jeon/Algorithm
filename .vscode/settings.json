@@ -105,7 +105,8 @@
     "source_location": "cpp",
     "utility": "cpp",
     "stop_token": "cpp",
-    "syncstream": "cpp"
+    "syncstream": "cpp",
+    "k진수에서 소수 개수 구하기": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
