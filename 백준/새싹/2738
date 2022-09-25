@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[101][101], b[101][101];
+int main()
+{
+    int n, m, temp, i, j;
+    cin >> n >> m;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            cin >> a[i][j];
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+        {
+            cin >> temp;
+            a[i][j] += temp;
+        }
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            cout << a[i][j] << " ";
+        }
+        cout << '\n';
+    }
+    return 0;
+}

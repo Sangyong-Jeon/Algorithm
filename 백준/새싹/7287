@@ -1,0 +1,8 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    cout << "117\n"
+         << "tkddyd420";
+    return 0;
+}
