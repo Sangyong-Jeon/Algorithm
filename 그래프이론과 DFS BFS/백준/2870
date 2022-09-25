@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n;
+vector<string> v;
+string s, ret;
+void go()
+{
+    while (true) // 숫자 앞에 0이 있는 경우 삭제
+    {
+        if (ret.size() && ret.front() == '0') // 항상 사이즈가 있는지 체크 후 검증
+            ret.erase(ret.begin());
+        else
+            break;
+    }
+    if (ret.size() == 0) // 숫자 앞에 0을 다 삭제했는데 사이즈가 0이면, "000"이므로 "0"을 넣어줌
+        ret = "0";
+    v.push_back(ret);
+    ret = "";
+}
+bool cmp(string a, string b)
+{
+    if (a.size() == b.size())
+        return a < b;
+    return a.size() < b.size();
+}
+int main()
+{
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s;
+        for (int j = 0; j < s.size(); j++)
+        {
+            if (s[j] < 65) // 숫자일 때
+                ret += s[j];
+            else if (ret.size())
+                go();
+        }
+        if (ret.size()) // 알파벳이 없는 경우 ret에 숫자만 쌓였을 수도 있으므로 체크
+            go();
+    }
+    sort(v.begin(), v.end(), cmp); // 문자열 정렬의 기본값은 아스키코드값을 기준으로 하므로 커스텀 정렬을 넣어야함.
+    for (string i : v)
+        cout << i << "\n";
+    return 0;
+}
+/*
+문자열 정렬 기본값 예시
+"20", "123" 이 주어질 때
+앞 글자만 비교하기때문에 "123"이 더 작게 나타남.
+따라서 사이즈가 작은게 더 작은걸로 하고, 사이즈가 같을 때만 앞 문자부터 비교하는걸로 만들기
+*/
