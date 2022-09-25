@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int chk, prev, c;
+    cin >> prev >> c;
+    if (prev - c > 0)
+        chk = 1;
+    else
+        chk = -1;
+    prev = c;
+    for (int i = 0; i < 6; i++)
+    {
+        cin >> c;
+        if (c + chk != prev)
+        {
+            cout << "mixed";
+            return 0;
+        }
+        prev = c;
+    }
+    if (chk == -1)
+        cout << "ascending";
+    else
+        cout << "descending";
+    return 0;
+}
