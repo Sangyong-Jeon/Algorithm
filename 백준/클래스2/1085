@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int x, y, w, h, ret_x, ret_y, ret;
+    cin >> x >> y >> w >> h;
+    ret_x = (x > w - x) ? w - x : x;
+    ret_y = (y > h - y) ? h - y : y;
+    ret = ret_x > ret_y ? ret_y : ret_x;
+    cout << ret;
+    return 0;
+}
