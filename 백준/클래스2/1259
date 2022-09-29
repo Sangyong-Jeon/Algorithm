@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    string str, r_str;
+    while (true)
+    {
+        cin >> str;
+        if (str == "0")
+            break;
+        r_str = str;
+        reverse(r_str.begin(), r_str.end());
+        if (str == r_str)
+            cout << "yes" << '\n';
+        else
+            cout << "no" << '\n';
+    }
+    return 0;
+}
