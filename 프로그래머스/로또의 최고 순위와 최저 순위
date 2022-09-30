@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int resultPoint(int n)
+{
+    if (n == 0 || n == 1)
+        return 6;
+    return 7 - n;
+}
+
+vector<int> solution(vector<int> lottos, vector<int> win_nums)
+{
+    vector<int> answer;
+    sort(lottos.begin(), lottos.end());
+    sort(win_nums.begin(), win_nums.end());
+    int point = 0, zero_num = 0;
+    for (int i = 5; i >= 0; i--)
+    {
+        if (lottos[i] == 0)
+            zero_num++;
+        for (int j = 5; j >= 0; j--)
+        {
+            if (lottos[i] == win_nums[j])
+            {
+                point++;
+                break;
+            }
+        }
+    }
+    int win_ret = point + zero_num;
+    int lose_ret = point;
+    answer.push_back(resultPoint(win_ret));
+    answer.push_back(resultPoint(lose_ret));
+    return answer;
+}
