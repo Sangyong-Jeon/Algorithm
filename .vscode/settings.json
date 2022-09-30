@@ -106,7 +106,8 @@
     "utility": "cpp",
     "stop_token": "cpp",
     "syncstream": "cpp",
-    "k진수에서 소수 개수 구하기": "cpp"
+    "k진수에서 소수 개수 구하기": "cpp",
+    "로또의 최고 순위와 최저 순위": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
