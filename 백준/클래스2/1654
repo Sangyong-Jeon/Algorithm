@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll a[10001];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int k, n;
+    ll max_n = 0, ret = 0;
+    cin >> k >> n;
+    for (int i = 0; i < k; i++)
+    {
+        cin >> a[i];
+        max_n = max(max_n, a[i]);
+    }
+    ll left = 1, right = max_n, mid;
+    while (left <= right)
+    {
+        mid = (left + right) / 2;
+        int now = 0;
+        for (int i = 0; i < k; i++)
+            now += a[i] / mid;
+
+        // mid로 나눈 값이 n보다 크거나 같을때, 더 긴 길이도 가능한지 검증
+        if (now >= n)
+        {
+            // n개를 만들 수 있으면 더 큰 값으로 갱신
+            left = mid + 1;
+            ret = max(ret, mid);
+        }
+        // mid로 나눈 값이 n보다 작을때, 더 짧은 길이도 가능한지 검증
+        else
+        {
+            right = mid - 1;
+        }
+    }
+    cout << ret << '\n';
+    return 0;
+}
