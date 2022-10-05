@@ -1,0 +1,53 @@
+/* 이분 탐색 풀이
+- upper_bound : 찾고자 하는 값보다 큰 첫번째 위치
+- lower_bound : 찾고자 하는 값 이상이 처음 나타나는 위치
+*/
+#include <bits/stdc++.h>
+using namespace std;
+int a[500001];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, m, temp;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    sort(a, a + n);
+    cin >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> temp;
+        cout << upper_bound(a, a + n, temp) - lower_bound(a, a + n, temp) << " ";
+    }
+    return 0;
+}
+
+/* HashMap 이용
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+unordered_map<long long, int> _map;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, m;
+    long long num;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> num;
+        _map[num]++;
+    }
+    cin >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> num;
+        cout << _map[num] << " ";
+    }
+    return 0;
+}
+*/
