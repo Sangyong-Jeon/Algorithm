@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+int fac(int num) // 재귀로 팩토리얼 구하기
+{
+    if (num == 1 || num == 0)
+        return 1;
+    return fac(num - 1) * num;
+}
+int main()
+{
+    int n, k, ret = 0;
+    cin >> n >> k;
+    cout << fac(n) / (fac(k) * fac(n - k));
+    return 0;
+}
+/*
+nCr 공식
+nCr = n!/(r!*(n-r))!
+*/
+/*
+#include <bits/stdc++.h>
+using namespace std;
+int fac(int num) // num! 팩토리얼 구하기
+{
+    if (num == 0)
+        return 1;
+    int sum = 1;
+    for (int i = 1; i <= num; i++)
+        sum *= i;
+    return sum;
+}
+int main()
+{
+    int n, k;
+    cin >> n >> k;
+    cout << fac(n) / (fac(k) * fac(n - k));
+    return 0;
+}
+*/
