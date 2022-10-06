@@ -1,0 +1,104 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    vector<int> v;
+    int n, k;
+    cin >> n >> k;
+    for (int i = 1; i <= n; i++)
+        v.push_back(i);
+    int size = v.size();
+    int idx = 0;
+    cout << "<";
+    while (size > 0)
+    {
+        idx = (idx + k - 1) % size;
+        if (size == 1)
+            cout << v[idx] << ">";
+        else
+            cout << v[idx] << ", ";
+        v.erase(v.begin() + idx);
+        size = v.size();
+    }
+    return 0;
+}
+/*
+/==1번째==/
+idx = (0 + 3 - 1) % 7 = 2
+v[2] = 3
+124567
+/==2번째==/
+idx = (2 + 3 - 1) % 6 = 4
+v[4] = 6
+12457
+/==3번째==/
+idx = (4 + 3 - 1) % 5 = 1
+v[1] = 2
+1457
+/==4번째==/
+idx = (1 + 3 - 1) % 4 = 3
+v[3] = 7
+145
+/==5번째==/
+idx = (3 + 3 - 1) % 3 = 2
+v[2] = 5
+14
+/==6번째==/
+idx = (2 + 3 - 1) % 2 = 0
+v[0] = 1
+4
+/==7번째==/
+idx = (0 + 3 - 1) % 1 = 0
+v[0] = 4
+*/
+/*
+#include <bits/stdc++.h>
+using namespace std;
+queue<int> q;
+int main()
+{
+    int n, k;
+    cin >> n >> k;
+    for (int i = 1; i <= n; i++)
+        q.push(i);
+    cout << "<";
+    while (!q.empty())
+    {
+        for (int i = 1; i < k; i++)
+        {
+            q.push(q.front());
+            q.pop();
+        }
+        cout << q.front();
+        if (q.size() != 1)
+            cout << ", ";
+        q.pop();
+    }
+    cout << ">";
+    return 0;
+}
+*/
+/*
+입력 : 1234567
+
+/==1번째==/
+3456712
+456712
+/==2번째==/
+671245
+71245
+/==3번째==/
+24571
+4571
+/==4번째==/
+7145
+145
+/==5번째==/
+514
+14
+/==6번째==/
+14
+4
+/==7번째==/
+4
+*/
