@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+int stk[10001], t = -1;
+void push(int x)
+{
+    if (t > 10000)
+        return;
+    stk[++t] = x;
+}
+int pop()
+{
+    if (t == -1)
+        return -1;
+    return stk[t--];
+}
+int size()
+{
+    return t + 1;
+}
+int empty()
+{
+    return t == -1;
+}
+int top()
+{
+    if (t == -1)
+        return -1;
+    return stk[t];
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, num;
+    cin >> n;
+    string s;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s;
+        if (s.find("push") != string::npos)
+        {
+            cin >> num;
+            push(num);
+        }
+        else if (s.find("top") != string::npos)
+            cout << top() << '\n';
+        else if (s.find("size") != string::npos)
+            cout << size() << '\n';
+        else if (s.find("empty") != string::npos)
+            cout << empty() << '\n';
+        else if (s.find("pop") != string::npos)
+            cout << pop() << '\n';
+    }
+    return 0;
+}
