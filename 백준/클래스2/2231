@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, sum, part;
+    cin >> n;
+    for (int i = n - 54; i < n; i++)
+    {
+        sum = i;
+        part = i;
+        while (part)
+        {
+            sum += part % 10;
+            part /= 10;
+        }
+        if (n == sum)
+        {
+            cout << i;
+            return 0;
+        }
+    }
+    cout << 0;
+    return 0;
+}
