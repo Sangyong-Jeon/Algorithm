@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int chk;
+    string s;
+    stack<char> stk;
+    while (getline(cin, s))
+    {
+        if (s == ".")
+            break;
+        chk = 0;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] == '(' || s[i] == '[')
+                stk.push(s[i]);
+            if (s[i] == ')')
+            {
+                if (stk.empty() || stk.top() != '(')
+                {
+                    chk = 1;
+                    break;
+                }
+                stk.pop();
+            }
+            if (s[i] == ']')
+            {
+                if (stk.empty() || stk.top() != '[')
+                {
+                    chk = 1;
+                    break;
+                }
+                stk.pop();
+            }
+        }
+        if (chk == 0 && stk.empty())
+            cout << "yes" << '\n';
+        else
+            cout << "no" << '\n';
+        // 스택 초기화
+        while (!stk.empty())
+            stk.pop();
+    }
+    return 0;
+}
