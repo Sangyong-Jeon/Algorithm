@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[41];
+int fibo(int n)
+{
+    if (a[n] != 0)
+        return a[n];
+    if (n <= 0)
+    {
+        a[0] = 0;
+        return 0;
+    }
+    else if (n == 1)
+    {
+        a[1] = 1;
+        return 1;
+    }
+    else
+        return a[n] = fibo(n - 1) + fibo(n - 2);
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int t, n;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        if (n == 0)
+            cout << "1 0\n";
+        else if (n == 1)
+            cout << "0 1\n";
+        else
+        {
+            fibo(n);
+            cout << a[n - 1] << " " << a[n] << '\n';
+        }
+    }
+    return 0;
+}
