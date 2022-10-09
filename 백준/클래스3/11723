@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[21];
+void Add(int x)
+{
+    if (a[x] == 0)
+        a[x]++;
+}
+void Remove(int x)
+{
+    if (a[x])
+        a[x]--;
+}
+void Check(int x)
+{
+    if (a[x])
+        cout << "1\n";
+    else
+        cout << "0\n";
+}
+void Toggle(int x)
+{
+    if (a[x])
+        a[x]--;
+    else
+        a[x]++;
+}
+void All()
+{
+    for (int i = 1; i <= 20; i++)
+        a[i] = 1;
+}
+void Empty()
+{
+    for (int i = 1; i <= 20; i++)
+        a[i] = 0;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, number;
+    string s;
+    cin >> n;
+    while (n--)
+    {
+        cin >> s;
+        if (s == "add")
+        {
+            cin >> number;
+            Add(number);
+        }
+        else if (s == "check")
+        {
+            cin >> number;
+            Check(number);
+        }
+        else if (s == "remove")
+        {
+            cin >> number;
+            Remove(number);
+        }
+        else if (s == "toggle")
+        {
+            cin >> number;
+            Toggle(number);
+        }
+        else if (s == "all")
+        {
+            All();
+        }
+        else if (s == "empty")
+        {
+            Empty();
+        }
+    }
+    return 0;
+}
