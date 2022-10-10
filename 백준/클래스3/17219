@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+unordered_map<string, string> hashMap;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n, m;
+    cin >> n >> m;
+    string key, value;
+    while (n--)
+    {
+        cin >> key >> value;
+        hashMap[key] = value;
+    }
+    while (m--)
+    {
+        cin >> key;
+        cout << hashMap[key] << '\n';
+    }
+    return 0;
+}
