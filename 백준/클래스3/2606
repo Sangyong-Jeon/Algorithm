@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[101], visited[101];
+vector<pair<int, int>> v;
+void virus(int n)
+{
+    if (visited[n] == 1)
+        return;
+    a[n] = visited[n] = 1;
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (v[i].first == n)
+            virus(v[i].second);
+        else if (v[i].second == n)
+            virus(v[i].first);
+    }
+}
+int main()
+{
+    int computer, num, first, second, cnt = 0;
+    cin >> computer >> num;
+    while (num--)
+    {
+        cin >> first >> second;
+        v.push_back({first, second});
+    }
+    virus(1);
+    for (int i = 2; i <= computer; i++)
+        if (a[i] == 1)
+            cnt++;
+    cout << cnt << '\n';
+    return 0;
+}
