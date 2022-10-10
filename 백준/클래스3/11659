@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[100001];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, m, num1, num2;
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        a[i] += a[i - 1];
+    }
+    for (int i = 0; i < m; i++)
+    {
+        cin >> num1 >> num2;
+        cout << a[num2] - a[num1 - 1] << '\n';
+    }
+    return 0;
+}
+/* https://www.acmicpc.net/problem/11659
+
+100,000개의 숫자를 전부 합쳐야할 수 있어서 미리 들어오는 숫자들의 합을 구해놓는다.
+입력 : 5 4 3 2 1
+배열 : 5 9 12 14 15
+이랬을 때 바로 2에서 4번째 합을 구하려면 a[4] - a[1] = 14 - 5 = 9 가 나온다.
+*/
