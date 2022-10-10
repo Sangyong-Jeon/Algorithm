@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[15][15];
+int main()
+{
+    // 0층 초기화
+    for (int i = 1; i <= 14; i++)
+    {
+        a[0][i] = i; // 0층 i호 = i명
+        a[i][1] = 1; // i층 1호 = 1명
+    }
+
+    for (int i = 1; i <= 14; i++)     // 1층~14층까지
+        for (int j = 2; j <= 14; j++) // 2호~14호
+            a[i][j] = a[i - 1][j] + a[i][j - 1];
+
+    int t, k, n;
+    cin >> t;
+    while (t--)
+    {
+        cin >> k >> n;
+        cout << a[k][n] << '\n';
+    }
+    return 0;
+}
