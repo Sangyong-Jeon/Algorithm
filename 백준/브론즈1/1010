@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dp[30][30];
+int combi(int n, int r)
+{
+    if (dp[n][r])
+        return dp[n][r];
+    if (r == 0 || n == r) // 조합공식에서 분모가 n!/r!*(n-r)!이므로 1이 되는 경우
+        return dp[n][r] = 1;
+    dp[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
+    return dp[n][r];
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int t, n, r;
+    cin >> t;
+    while (t--)
+    {
+        cin >> r >> n;
+        cout << combi(n, r) << '\n';
+    }
+    return 0;
+}
+/* https://www.acmicpc.net/problem/1010
+
+문제풀이
+동쪽의 사이트(n)개 중에 서쪽의 사이트(r)개를 선택하는 문제이다.
+문제의 제약사항 중에 다리를 겹치지 않게 놓아야한다는데 이건 굳이 따로 처리할 필요가 없다.
+동쪽의 사이트 중에서 r개만큼 선택한다면 서쪽의 사이트의 윗쪽부터 연결한다고 가정할 수 있기 때문이다.
+즉, 동쪽의 사이트를 선택만 하면 자동으로 겹치지않게 연결되는 것이다.
+nCr = (n-1)C(r-1) + (n-1)Cr
+nCr = n!/r!*(n-r)!
+2|2 = 1
+1|5 = 5
+
+*/

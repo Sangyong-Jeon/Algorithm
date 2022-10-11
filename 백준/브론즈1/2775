@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long a[91];
+long long fibo(long long n)
+{
+    if (n == 0 || n == 1)
+        return n;
+    if (a[n] != 0)
+        return a[n];
+    a[n] = fibo(n - 1) + fibo(n - 2);
+    return a[n];
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    cout << fibo(n) << '\n';
+    return 0;
+}
+/* https://www.acmicpc.net/problem/2748
+
+*/
