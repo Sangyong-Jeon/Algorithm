@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[1001];
+int tile(int n)
+{
+    if (n == 1 || n == 2)
+        return n;
+    if (a[n])
+        return a[n];
+    a[n] = tile(n - 1) + tile(n - 2);
+    a[n] %= 10007;
+    return a[n];
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    cout << tile(n) << '\n';
+    return 0;
+}
+/* https://www.acmicpc.net/problem/11726
+
+문제 해설
+n = 1 2 3 4 5
+a = 1 2 3 5 8
+피보나치 수열과 비슷한 점화식으로 동작한다.
+피보나치는 첫째항과 둘째항이 1이지만 여기서는 1과 2로 시작한다.
+a[n] = a[n-1] + a[n-2]
+*/
