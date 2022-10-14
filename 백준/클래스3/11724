@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> vec[1001];
+int visited[1001], n, m;
+void dfs(int num)
+{
+    visited[num] = 1;
+    for (int i = 0; i < vec[num].size(); i++)
+    {
+        int idx = vec[num][i];
+        if (visited[idx] == 0)
+            dfs(idx);
+    }
+}
+void bfs(int num)
+{
+    queue<int> q;
+    q.push(num);
+    visited[num] = 1;
+    while (!q.empty())
+    {
+        int cur = q.front();
+        q.pop();
+
+        for (int i = 0; i < vec[cur].size(); i++)
+        {
+            int idx = vec[cur][i];
+            if (visited[idx] == 0)
+            {
+                visited[idx] = 1;
+                q.push(idx);
+            }
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int u, v, ret = 0;
+    cin >> n >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> u >> v;
+        vec[u].push_back(v);
+        vec[v].push_back(u);
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (visited[i] == 0)
+        {
+            ret++;
+            dfs(i);
+        }
+    }
+    cout << ret << '\n';
+    return 0;
+}
