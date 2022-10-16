@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[100001], visited[100001];
+int find_time = 0, n, k;
+void bfs()
+{
+    queue<int> q;
+    q.push(n);
+    while (1)
+    {
+        int q_size = q.size();
+        for (int i = 0; i < q_size; i++)
+        {
+            int number = q.front();
+            q.pop();
+            visited[number] = 1;
+            if (number == k)
+                return;
+            if (number + 1 <= 100000 && !visited[number + 1])
+                q.push(number + 1);
+            if (number - 1 >= 0 && !visited[number - 1])
+                q.push(number - 1);
+            if (number * 2 <= 100000 && !visited[number * 2])
+                q.push(number * 2);
+        }
+        find_time++;
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> n >> k;
+    bfs();
+    cout << find_time << '\n';
+    return 0;
+}

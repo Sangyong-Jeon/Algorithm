@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int t, k, num;
+    char order;
+    cin >> t;
+    while (t--)
+    {
+        cin >> k;
+        multiset<int> ms;
+        while (k--)
+        {
+            cin >> order >> num;
+            if (order == 'I')
+                ms.insert(num);
+            else if (!ms.empty() && num == -1) // 최소값 삭제
+                ms.erase(ms.begin());
+            else if (!ms.empty() && num == 1) // 최댓값 삭제
+            {
+                auto iter = ms.end(); // 반복자 생성
+                iter--;               // end()는 원소 끝 다음 주소를 반환하므로 1을 빼줌
+                ms.erase(iter);       // 최대값 원소의 주소값을 삭제
+            }
+        }
+        if (ms.empty())
+            cout << "EMPTY" << '\n';
+        else
+        {
+            auto iter = ms.end();
+            iter--;
+            cout << *iter << " " << *ms.begin() << '\n';
+        }
+    }
+    return 0;
+}
+/*
+multiset은 중복 가능한 key를 구현할 수 있음
+원소를 넣으면 자동 오름차순 정렬
+insert() : 원소 삽입
+erase() : 원소 삭제 (값을 직접 넣으면 해당 값을 가진 모든 원소 삭제되지만, 주소값을 넣으면 해당 주소값 원소만 삭제)
+*/

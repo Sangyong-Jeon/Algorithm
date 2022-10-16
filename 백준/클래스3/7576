@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+int m, n, day;
+int a[1001][1001];
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {-1, 0, 1, 0};
+queue<pair<int, int>> q;
+void bfs()
+{
+    while (!q.empty())
+    {
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        for (int i = 0; i < 4; i++)
+        {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && ny >= 0 && nx < n && ny < m)
+            {
+                if (a[nx][ny] == 0)
+                {
+                    a[nx][ny] = a[x][y] + 1;
+                    q.push({nx, ny});
+                }
+            }
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> m >> n;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j];
+            if (a[i][j] == 1)
+                q.push({i, j});
+        }
+    bfs();
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (a[i][j] == 0)
+            {
+                cout << "-1\n";
+                return 0;
+            }
+            if (day < a[i][j])
+                day = a[i][j];
+        }
+    }
+    cout << day - 1 << '\n';
+    return 0;
+}
