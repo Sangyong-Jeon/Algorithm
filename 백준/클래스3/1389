@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, r[101][101];
+void floydWarshall()
+{
+    for (int k = 1; k <= n; k++)         // k = 거쳐가는 노드
+        for (int i = 1; i <= n; i++)     // i = 출발 노드
+            for (int j = 1; j <= n; j++) // j = 도착 노드
+            {
+                if (r[i][k] && r[k][j])
+                {
+                    if (r[i][j] == 0)
+                        r[i][j] = r[i][k] + r[k][j];
+                    else
+                        r[i][j] = min(r[i][j], r[i][k] + r[k][j]);
+                }
+            }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int a, b, sum, person, ret = 987654321;
+    cin >> n >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> a >> b;
+        r[a][b] = r[b][a] = 1;
+    }
+    floydWarshall();
+    for (int i = 1; i <= n; i++)
+    {
+        sum = 0;
+        for (int j = 1; j <= n; j++)
+            sum += r[i][j];
+        if (ret > sum)
+        {
+            ret = sum;
+            person = i;
+        }
+    }
+    cout << person << '\n';
+    return 0;
+}

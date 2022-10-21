@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dp[50001] = {0, 1};
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) // 1 ~ n 까지 반복
+    {
+        dp[i] = dp[1] + dp[i - 1];
+        for (int j = 2; j * j <= i; j++)
+            dp[i] = min(dp[i], 1 + dp[i - j * j]);
+    }
+    cout << dp[n] << '\n';
+    return 0;
+}
+
+/*
+1 = 1 (제곱수)
+2 = 2
+3 = 3
+4 = 1 (제곱수)
+5 = 2
+6 = 3
+7 = 4
+8 = 2
+9 = 1 (제곱수)
+10 = 2
+11 = 3
+12 = 4
+13 = 2
+14 = 3
+15 = 4
+16 = 1 (제곱수)
+
+만약 dp[101] 을 구할 때
+- dp[1] + dp[100]
+- dp[4] + dp[97]
+- dp[9] + dp[92]
+- dp[16] + dp[85]
+...
+- dp[64] + dp[37]
+- dp[81] + dp[20]
+이 중에서 가장 작은 값을 고르면 됨.
+제곱수들은 값이 1이라서 제곱수를 기반으로 경우의 수를 찾음
+
+*/
