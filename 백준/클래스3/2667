@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+vector<int> ret;
+int n, countNum, a[26][26], visited[26][26];
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {-1, 0, 1, 0};
+int dfs(int x, int y)
+{
+    if (visited[x][y])
+        return 0;
+    visited[x][y] = 1;
+    if (a[x][y] == 0)
+        return 0;
+    a[x][y] = countNum;
+    int sum = 1;
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+            sum += dfs(nx, ny);
+    }
+    return sum;
+}
+int main()
+{
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            scanf("%1d", &a[i][j]);
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (visited[i][j] == 0 && a[i][j])
+            {
+                countNum++;
+                ret.push_back(dfs(i, j));
+            }
+        }
+    }
+    printf("%d\n", countNum);
+    sort(ret.begin(), ret.end());
+    for (int it : ret)
+        printf("%d\n", it);
+    return 0;
+}

@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, m, cnt = 0;
+    string str;
+    cin >> n >> m >> str;
+    for (int i = 0; i < m; i++)
+    {
+        int k = 0; // IOI 개수
+        if (str[i] == 'O')
+            continue;
+
+        while (str[i + 1] == 'O' && str[i + 2] == 'I')
+        {
+            k++;
+            if (k == n)
+            {
+                cnt++;
+                k--; // 중복 카운트 막기 위해 -1
+            }
+            i += 2; // O를 건너뜀
+        }
+    }
+    cout << cnt << '\n';
+    return 0;
+}
+/*
+반복문으로 앞에서부터 문자열을 확인하며 'I'가 나오면 while문을 통해 "IOI"가 나올때마다 k에 +1 해줌
+k == n이 될 때마다 k에 -1해주고 결과값에 +1해준다.
+
+예를 들면 "IOIOIOI", n=1 경우
+i = 0, k = 0, cnt = 1
+i = 2, k = 0, cnt = 2
+i = 4, k = 0, cnt = 3
+
+
+"OOIOIOIOIIOII", n=1 경우
+i = 0, k = 0, cnt = 0 , "OOIOIOIOIIOII"
+i = 1, k = 0, cnt = 0 , "OIOIOIOIIOII"
+i = 2, k = 0, cnt = 1 , "IOIOIOIIOII"
+i = 4, k = 0, cnt = 2 , "IOIOIIOII"
+i = 6, k = 0, cnt = 3 , "IOIIOII"
+i = 9, k = 0, cnt = 3 , "IIOII"
+i = 10, k = 0, cnt = 3 , "IOII"
+i = 11, k = 0, cnt = 4 , "IOII"
+i = 12, k = 0, cnt = 4 , "II"
+i = 13, k = 0, cnt = 4 , "I"
+
+
+*/

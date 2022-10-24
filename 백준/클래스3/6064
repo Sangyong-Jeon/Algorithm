@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+// 유클리드 호제법을 이용한 최대공약수
+int gcd(int a, int b)
+{
+    if (a == 0)
+        return b;
+    return gcd(b % a, a);
+}
+// 최소공배수 = (두수의 곱) / (최대공약수)
+int lcm(int a, int b)
+{
+    return (a * b) / gcd(a, b);
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int m, n, x, y;
+        cin >> m >> n >> x >> y;
+        int maxNum = lcm(m, n); // 멸망년도는 m과 n의 최소공배수
+        for (; x <= maxNum; x += m)
+        {
+            if ((x - 1) % n + 1 == y) // x % n = x 가 되어야하므로 (x%n == y)만 쓰면 틀렸었음.
+                break;
+        }
+
+        if (x > maxNum)
+            cout << "-1\n";
+        else
+            cout << x << '\n';
+    }
+    return 0;
+}
+
+/*
+m = 5, n = 7, x = 3, y = 4 일 때
+i : <x,y>
+1 : <1,1>
+2 : <2,2>
+3 : <3,3>
+4 : <4,4>
+5 : <5,5>
+6 : <1,6>
+7 : <2,7>
+8 : <3,1>
+9 : <4,2>
+10 : <5,3>
+11 : <1,4>
+12 : <2,5>
+13 : <3,6>
+14 : <4,7>
+15 : <5,1>
+16 : <1,2>
+17 : <2,3>
+18 : <3,4>
+19 : <4,5>
+20 : <5,6>
+
+x가 3인 경우만 찾으면 3번째, 8번째, 13번째, 18번째로 공차가 5인 등차수열을 가지고 있다.
+이 등차수열의 값을 n으로 나눈 나머지가 y의 값과 똑같다.
+즉, x = 3인 경우만 찾으면 된다.
+
+(x%n == y)를 쓰려면 그 전에 x%n == 0 일 때 x%n = n 으로 바꿔줘야한다.
+따라서 for문 안에 들어가는 코드는 다음과 같아진다.
+int j = x % n;
+if (j == 0)
+    j = n;
+if (j == y)
+    break;
+
+이렇게 쓰지 않으려면 ((x-1) % n + 1 == y)로 바꿔준다.
+*/
