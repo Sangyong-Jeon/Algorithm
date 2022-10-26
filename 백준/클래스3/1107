@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+int trouble[12];
+int check(int n)
+{
+    if (n == 0)
+    {
+        if (trouble[0]) // 고장난 버튼일 때
+            return 0;
+        else
+            return 1;
+    }
+    // n이 0이 아닐 때
+    int len = 0;
+    while (n > 0)
+    {
+        if (trouble[n % 10]) // n의 1의자리수 버튼이 고장난 버튼일 때
+            return 0;
+        n /= 10; // 1의 자리수를 버림
+        len++;
+    }
+    return len;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, m, temp;
+    cin >> n >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> temp;
+        trouble[temp] = 1;
+    }
+    int ans = n - 100; // 초기값을 숫자버튼 안누르게 되는 경우
+    if (ans < 0)       // 음수를 양수로 바꿔줌
+        ans = -ans;
+    // 채널 i를 정하고 고장난 버튼 확인
+    for (int i = 0; i <= 1000000; i++)
+    {
+        int len = check(i);
+        if (len > 0)
+        {
+            int press = abs(i - n);
+            if (ans > press + len)
+                ans = press + len;
+        }
+    }
+    cout << ans;
+    return 0;
+}
+/*
+check() 함수 설명
+채널 i를 정하고 i에 고장난 버튼이 있으면 0을 반환하고,
+고장난 버튼이 없으면 몇 번을 눌러서 채널 i가 만들어지는지 반환한다.
+
+check(i)를 사용해서 채널 i가 고장난 버튼이 아니라면 거기서 + 또는 -를 통해 몇 번만에 목표 n까지 만들어지는지 확인한다.
+*/
