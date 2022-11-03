@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, c_person, person;
+char picture[101][101];
+int visited[101][101], visited2[101][101];
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {-1, 0, 1, 0};
+int dfs(int x, int y)
+{
+    if (visited[x][y])
+        return 0;
+    visited[x][y] = 1;
+    for (int i = 0; i < 4; i++) // 상하좌우 검증
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+            if (picture[x][y] == picture[nx][ny])
+                dfs(nx, ny);
+    }
+    return 1;
+}
+int c_dfs(int x, int y)
+{
+    if (visited2[x][y])
+        return 0;
+    visited2[x][y] = 1;
+    char color = picture[x][y];
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+        {
+            if (color == 'B')
+            {
+                if (picture[x][y] == picture[nx][ny])
+                    c_dfs(nx, ny);
+            }
+            else if (color == 'R' || color == 'G')
+            {
+                if (picture[nx][ny] == 'R' || picture[nx][ny] == 'G')
+                    c_dfs(nx, ny);
+            }
+        }
+    }
+    return 1;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> n;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cin >> picture[i][j];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+        {
+            person += dfs(i, j);
+            c_person += c_dfs(i, j);
+        }
+    cout << person << " " << c_person << '\n';
+    return 0;
+}
