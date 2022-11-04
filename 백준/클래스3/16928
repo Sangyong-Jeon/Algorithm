@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+unordered_map<int, int> un_map;
+int board[102];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, m, a, b;
+    cin >> n >> m;
+    for (int i = 0; i < n + m; i++)
+    {
+        cin >> a >> b;
+        un_map[a] = b;
+    }
+    queue<int> q;
+    q.push(1);
+    while (!q.empty())
+    {
+        int x = q.front();
+        q.pop();
+        for (int i = 1; i <= 6; i++)
+        {
+            int nx = x + i;
+            if (nx > 100)
+                continue;
+            if (un_map.find(nx) != un_map.end())
+                nx = un_map[nx];
+            if (board[nx] == 0)
+            {
+                board[nx] = board[x] + 1;
+                q.push(nx);
+            }
+        }
+    }
+    cout << board[100] << '\n';
+    return 0;
+}

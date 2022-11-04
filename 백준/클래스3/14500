@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, m, ret;
+int a[501][501], visited[501][501];
+int dx[4] = {-1, 1, 0, 0};
+int dy[4] = {0, 0, -1, 1};
+void findShape4Max(int y, int x)
+{
+    if (y + 1 < n && x + 2 < m) // ㅜ 검사
+        ret = max(ret, a[y][x] + a[y][x + 1] + a[y][x + 2] + a[y + 1][x + 1]);
+    if (y + 2 < n && x + 1 < m) // ㅏ 검사
+        ret = max(ret, a[y][x] + a[y + 1][x] + a[y + 2][x] + a[y + 1][x + 1]);
+    if (y + 2 < n && x - 1 >= 0) // ㅓ 검사
+        ret = max(ret, a[y][x] + a[y + 1][x] + a[y + 2][x] + a[y + 1][x - 1]);
+    if (y - 1 >= 0 && x + 2 < m) // ㅗ 검사
+        ret = max(ret, a[y][x] + a[y][x + 1] + a[y][x + 2] + a[y - 1][x + 1]);
+}
+void findNormalMax(int y, int x, int sum, int cnt)
+{
+    if (cnt == 3)
+    {
+        ret = max(ret, sum);
+        return;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx >= 0 && nx < m && ny >= 0 && ny < n && !visited[ny][nx])
+        {
+            visited[ny][nx] = 1;
+            findNormalMax(ny, nx, sum + a[ny][nx], cnt + 1);
+            visited[ny][nx] = 0;
+        }
+    }
+}
+void findMax(int y, int x)
+{
+    findShape4Max(y, x);
+    visited[y][x] = 1;
+    findNormalMax(y, x, a[y][x], 0);
+    visited[y][x] = 0;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> a[i][j];
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            findMax(i, j);
+
+    cout << ret << '\n';
+    return 0;
+}

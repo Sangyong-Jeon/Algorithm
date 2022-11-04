@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a, b;
+int visited[10000];
+void bfs()
+{
+    queue<pair<int, string>> q;
+    q.push({a, ""});
+    visited[a] = 1;
+
+    while (!q.empty())
+    {
+        int number = q.front().first;
+        string str = q.front().second;
+        q.pop();
+
+        if (number == b)
+        {
+            cout << str << '\n';
+            return;
+        }
+
+        int D = (number * 2) % 10000;
+        if (!visited[D])
+        {
+            visited[D] = 1;
+            q.push({D, str + "D"});
+        }
+
+        int S = (number - 1 >= 0) ? number - 1 : 9999;
+        if (!visited[S])
+        {
+            visited[S] = 1;
+            q.push({S, str + "S"});
+        }
+
+        int L = (number % 1000) * 10 + (number / 1000);
+        if (!visited[L])
+        {
+            visited[L] = 1;
+            q.push({L, str + "L"});
+        }
+
+        int R = (number % 10) * 1000 + (number / 10);
+        if (!visited[R])
+        {
+            visited[R] = 1;
+            q.push({R, str + "R"});
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> a >> b;
+        memset(visited, 0, sizeof(visited));
+        bfs();
+    }
+    return 0;
+}
