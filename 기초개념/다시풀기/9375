@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int t, n;
+    string str1, str2;
+
+    cin >> t;
+
+    while (t--)
+    {
+        map<string, int> m;
+        cin >> n;
+        while (n--)
+        {
+            cin >> str1 >> str2;
+            m[str2]++;
+        }
+        int ret = 1;
+        for (auto c : m)
+            ret *= (c.second + 1);
+        ret--; // 알몸이 아닌 상태
+        cout << ret << '\n';
+    }
+    return 0;
+}
+/*
+예시1)
+hat headgear
+sunglasses eyewear
+turban headgear
+
+위 경우 5가지가 있음.
+1. hat
+2. sunglasses
+3. turban
+4. hat , sunglasses
+5. turban , sunglasses
+
+좀 더 풀자면 헤드기어 2개, 아이웨어 1개가 있다.
+헤드기어가 없는 경우와 아이웨어가 없는 경우를 포함하면 헤드기어 3개, 아이웨어 2개가 됨.
+3 * 2 = 6 에서 아무것도 없는 경우를 빼주면 5가 나옴
+
+*/

@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[15001];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n, m, cnt = 0;
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    sort(a, a + n);
+
+    if (m > 200000)
+    {
+        cout << 0 << '\n';
+    }
+    else
+    {
+        int left = 0, right = n - 1;
+        while (left < right)
+        {
+            if (a[left] + a[right] == m)
+            {
+                cnt++;
+                left++;
+                right--;
+            }
+            else if (a[left] + a[right] < m)
+                left++;
+            else if (a[left] + a[right] > m)
+                right--;
+        }
+        cout << cnt << '\n';
+    }
+
+    return 0;
+}

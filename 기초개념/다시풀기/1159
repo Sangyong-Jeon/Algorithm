@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[26];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    string name, ret = "";
+    cin >> n;
+
+    while (n--)
+    {
+        cin >> name;
+        a[name[0] - 'a']++;
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        if (a[i] >= 5)
+            ret += i + 'a';
+    }
+    if (ret != "")
+        cout << ret << '\n';
+    else
+        cout << "PREDAJA\n";
+    return 0;
+}
