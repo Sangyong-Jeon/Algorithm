@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <queue>
-#include <utility>
+#include <bits/stdc++.h>
 using namespace std;
 int n, m, a[101][101], visited[101][101];
 queue<pair<int, int>> q;
