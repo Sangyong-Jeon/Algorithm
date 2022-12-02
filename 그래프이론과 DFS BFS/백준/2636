@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[104][104], visited[104][104];
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {-1, 0, 1, 0};
+int n, m, cnt, cnt2;
+vector<pair<int, int>> v;
+void go(int y, int x)
+{
+    visited[y][x] = 1;
+    if (a[y][x] == 1)
+    {
+        v.push_back({y, x});
+        return;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (nx < 0 || ny < 0 || nx >= m || ny >= n || visited[ny][nx])
+            continue;
+        go(ny, nx);
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> a[i][j];
+
+    while (true)
+    {
+        cnt2 = 0;
+        memset(visited, 0, sizeof(visited));
+        v.clear();
+        go(0, 0);
+        for (pair<int, int> p : v)
+        {
+            cnt2++;
+            a[p.first][p.second] = 0;
+        }
+
+        bool flag = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (a[i][j] != 0)
+                    flag = 1;
+
+        cnt++;
+        if (!flag)
+            break;
+    }
+    cout << cnt << '\n'
+         << cnt2 << '\n';
+    return 0;
+}
