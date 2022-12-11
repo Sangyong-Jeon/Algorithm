@@ -5,24 +5,14 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, cnt = 0;
+    int n, i = 666;
     cin >> n;
-    int i = 666;
-    while (true)
+    for (;; i++)
     {
-        int temp = i;
-        while (temp >= 666)
-        {
-            if (temp % 1000 == 666)
-            {
-                cnt++;
-                break;
-            }
-            temp /= 10;
-        }
-        if (n == cnt)
+        if (to_string(i).find("666") != string::npos)
+            n--;
+        if (n == 0)
             break;
-        i++;
     }
     cout << i << '\n';
     return 0;
